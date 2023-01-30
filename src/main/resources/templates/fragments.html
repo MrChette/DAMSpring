@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th=http://www.thymeleaf.org
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<link th:href="@{/css/header.css}" rel="stylesheet" />
+	
+</head>
+<body>
+<header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
+  <div class="navbar navbar-inverse navbar-fixed-top" th:fragment="header">
+    <div class="container">
+     	<div class="navbar-nav-scroll">
+		    <ul class="navbar-nav bd-navbar-nav flex-row">
+	    		<li sec:authorize="isAuthenticated()" class="nav-item" >
+					<a class="nav-link active" th:text="'Usuario: ' + ${#authentication.name}"></a>
+				</li>
+				<li class="nav-item">
+	        		<a class="nav-link active">|</a>
+		     	</li>
+		     	
+		      	<li  th:classappend="${module == 'home' ? 'active' : ''}" class="nav-item">
+	        		<a class="nav-link active" href="/" th:href="@{/home}">Home</a>
+		     	</li>
+		     	
+		      	<li sec:authorize="!isAuthenticated()" class="nav-item">
+			        <a class="nav-link active" th:href="@{/auth/registerForm}">Sign Up</a>
+		      	</li>
+		      	
+		      	<li sec:authorize="hasAuthority('ROL_ADMIN')" class="nav-item">
+		      		<a class="nav-link active" th:href="@{/profesores/listProfesores/}">Ver profesores</a>
+		      	</li>
+		      	
+		      	<!--   <li sec:authorize="hasAuthority('ROL_ADMIN')" class="nav-item">
+		      		<a class="nav-link active" th:href="@{/alumnos/listAlumnos/}">Ver alumnos</a>
+		      	</li> -->
+		      	
+		      	<li sec:authorize="hasAuthority('ROL_ADMIN')" class="nav-item">
+		      		<a class="nav-link active" th:href="@{/cursos/listCursos/}">Ver cursos</a>
+		      	</li>
+		      	
+		      	<li sec:authorize="hasAuthority('ROL_ADMIN')" class="nav-item">
+		      		<a class="nav-link active" th:href="@{/noticia/listNoticias/}">Ver Noticias</a>
+		      	</li>
+		      	<li sec:authorize="hasAuthority('ROL_ADMIN')" class="nav-item">
+		      		<a class="nav-link active" th:href="@{/alumnos/listAlumnos/}">Ver Alumnos</a>
+		      	</li>
+		      	
+		      	<li sec:authorize="hasAuthority('ROL_ALUMNO')" class="nav-item">
+		      		<a class="nav-link active" th:href="@{/alumnos/listNoticias/}">Ver Noticias</a>
+		      	</li>
+		      	<li sec:authorize="hasAuthority('ROL_ALUMNO')" class="nav-item">
+		      		<a class="nav-link active" th:href="@{/alumnos/listNotas/}">Ver Notas</a>
+		      	</li>
+		      	
+		      	<li sec:authorize="hasAuthority('ROL_PROFESOR')" class="nav-item">
+		      		<a class="nav-link active" th:href="@{/profesores/listCursosEmail/}+${#authentication.name}">Mis cursos</a>
+		      	</li>
+		      	
+		      	<li sec:authorize="hasAuthority('ROL_ALUMNO')" class="nav-item">
+		      		<a class="nav-link active" th:href="@{/alumnos/listCursos/}">Ver Cursos</a>
+		      	</li>
+		      	 
+		      	<li sec:authorize="!isAuthenticated()" class="nav-item">
+		      		<a class="nav-link active" th:href="@{/auth/login}">Log In</a>
+		        </li>
+		        
+		        <li sec:authorize="isAuthenticated()" class="nav-item">
+			    	<form class="form-inline" th:action="@{/auth/logout}" method="post">
+						<button class="nav-link active" th:href="@{/auth/login}">Log Out</button>
+					</form>
+       			</li>
+		      	
+			  
+			  
+		    </ul>
+  		</div>
+    </div>
+  </div>
+  </header>
+</body>
+</html>

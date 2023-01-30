@@ -1,0 +1,70 @@
+	<!DOCTYPE html>
+<html xmlns:th=http://www.thymeleaf.org
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link th:href="@{/css/styles.css}" rel="stylesheet" />
+<link th:href="@{/css/header.css}" rel="stylesheet" />
+<link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+<link rel="stylesheet" href="css/font-awesome.min.css">
+
+<title>Noticias Alumno	</title>
+</head>
+<body>
+	<div th:replace="fragments :: header"></div>
+	<br>
+	<div class="alert alert-success" th:if="${success != null}"
+						th:text="${success}"></div>
+					<div class="alert alert-danger" th:if="${error != null}"
+						th:text="${error}"></div>
+					<div class="alert alert-warning" th:if="${warning != null}"
+						th:text="${warning}"></div>
+					<div class="alert alert-info" th:if="${info != null}"
+						th:text="${info}">
+	</div>
+	<br />
+	<h1 style="text-align: center;">Noticias Alumno</h1>
+	
+	<br/><br/>
+	
+		
+		
+	<table class="table">
+		<thead class="thead-light">
+			<tr>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="noticia: ${noticias}"  >
+				<th style="margin:0 auto;text-align: center">
+					<div class="tarjeta"  style="margin-bottom:5%;margin-top:5%">
+						<div class="titulo">
+							<a th:text=${noticia.titulo}></a>
+						</div>
+						<div class="cuerpo">
+							<img th:src="@{/resources/}+${noticia.imagen}" alt="Imagen no encontrada">
+							<br/>
+							<a th:text=${noticia.descripcion}></a>
+						</div>
+					</div>
+				</th>
+				<br/>
+			</tr>
+		</tbody>
+	</table>
+
+<br><br>
+	
+	<div style="text-align:center;width: 500px;margin: auto;">
+		<a th:href="@{/home}">
+			<button type="button" class="btn btn-primary">Regresar</button>
+		</a>
+	</div>
+</body>
+</html>

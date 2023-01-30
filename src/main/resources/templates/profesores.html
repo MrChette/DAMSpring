@@ -1,0 +1,65 @@
+	<!DOCTYPE html>
+	<html xmlns:th=http://www.thymeleaf.org
+		xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link th:href="@{/css/styles.css}" rel="stylesheet" />
+<link th:href="@{/css/header.css}" rel="stylesheet" />
+<link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+<link rel="stylesheet" href="css/font-awesome.min.css">
+
+<title>Lista de profesores</title>
+</head>
+<body>
+	<div th:replace="fragments :: header"></div>
+	<br>
+	<div class="alert alert-success" th:if="${success != null}"
+						th:text="${success}"></div>
+					<div class="alert alert-danger" th:if="${error != null}"
+						th:text="${error}"></div>
+					<div class="alert alert-warning" th:if="${warning != null}"
+						th:text="${warning}"></div>
+					<div class="alert alert-info" th:if="${info != null}"
+						th:text="${info}">
+	</div>
+	<br />
+	<h1 style="text-align: center;">Profesores</h1>
+	<br/>
+	<table class="table table-bordered">
+	
+		<thead class="thead-light">
+			<tr>
+				<th>Nombre</th>
+				<th>Apellidos</th>
+				<th>Email</th>
+			</tr>
+		</thead>
+	<tbody th:each="profesor: ${profesores}">
+		<tr>
+			<th th:text=${profesor.nombre}></th>
+			<th th:text=${profesor.apellidos}></th>
+			<th th:text=${profesor.email}></th>
+			<th>
+				<div style="text-align:center;margin: auto;">
+				<a th:href="@{/profesores/activarUsuario/} + ${profesor.email}">
+					<button type="button" class="btn btn-primary">Activar</button>
+				</a>
+				<a th:href="@{/profesores/deleteProfesor/} + ${profesor.idProfesor}" th:onclick="return confirm('Estas seguro que deseas eliminar el registro?');">
+		        	<button type="button" class="btn btn-danger">Borrar</button>
+				</a> 	
+				</div>
+			</th>
+		</tr>
+	</table>
+	<br>
+	<div style="text-align:center;width: 500px;margin: auto;">
+		<a th:href="@{/home}">
+			<button type="button" class="btn btn-primary">Regresar</button>
+		</a>
+	</div>
+</body>
+</html>

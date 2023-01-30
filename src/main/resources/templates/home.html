@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th=http://www.thymeleaf.org
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link th:href="@{/css/styles.css}" rel="stylesheet" />
+<link th:href="@{/css/header.css}" rel="stylesheet" />
+<link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+<link rel="stylesheet" href="css/font-awesome.min.css">
+
+<title>Inicio</title>
+</head>
+<body>
+	<div th:replace="fragments :: header"></div>
+	<br>
+	<div style="text-align:center;width: 500px;margin: auto;">
+    <header>
+        <h1>¡Bienvenido!</h1>
+    </header>
+    <section layout:fragment="custom-content">
+	        <div class="topnav">
+	        
+			  <a sec:authorize="hasAuthority('ROL_ADMIN')" class="nav-item" th:href="@{/profesores/listProfesores/}">
+			  	<button type="button" class="btn btn-primary"><i class="fa-solid fa-pen-to-square">Ver profesores</i></button>
+			  </a>
+			  <a sec:authorize="hasAuthority('ROL_ADMIN')" class="nav-item" th:href="@{/alumnos/listAlumnos/}">
+			  	<button type="button" class="btn btn-primary"><i class="fa-solid fa-pen-to-square">Ver alumnos</i></button>
+			  </a>
+			  <a sec:authorize="hasAuthority('ROL_ADMIN')" class="nav-item" th:href="@{/cursos/listCursos/}">
+			  	<button type="button" class="btn btn-primary"><i class="fa-solid fa-pen-to-square">Ver cursos</i></button>
+			  </a>
+			  <a sec:authorize="hasAuthority('ROL_ALUMNO')" class="nav-item" th:href="@{/alumnos/listCursos/}">
+			  	<button type="button" class="btn btn-primary"><i class="fa-solid fa-pen-to-square">Ver cursos</i></button>
+			  </a>
+<!-- 			  <a sec:authorize="isAuthenticated()" th:href="@{/edituser/}">Editar mis datos</a> -->
+			</div>
+			
+			<tbody th:each="student: ${students}"> 
+				<tr>
+					<th sec:authorize="hasAuthority('ROL_ALUMNO')" th:text=${alumno.nombre}></th> 
+					<th sec:authorize="hasAuthority('ROL_ALUMNO')" th:text=${alumno.apellidos}></th> 
+					<th sec:authorize="hasAuthority('ROL_ALUMNO')" th:text=${alumno.email}></th> 
+					<th sec:authorize="hasAuthority('ROL_PROFESOR')" th:text=${profesor.nombre}></th> 
+					<th sec:authorize="hasAuthority('ROL_PROFESOR')" th:text=${profesor.apellidos}></th> 
+					<th sec:authorize="hasAuthority('ROL_PROFESOR')" th:text=${profesor.email}></th> 
+				</tr> 
+			</tbody>
+    </section>
+    
+<!--     <h2>Noticias</h2> -->
+    
+<!--     <footer> -->
+<!--         <p>My custom footer</p> -->
+<!--         <p layout:fragment="custom-footer">Footer</p>		 -->
+<!--     </footer> -->
+    
+   <div class="alert alert-success" th:if="${success != null}"
+						th:text="${success}"></div>
+					<div class="alert alert-danger" th:if="${error != null}"
+						th:text="${error}"></div>
+					<div class="alert alert-warning" th:if="${warning != null}"
+						th:text="${warning}"></div>
+					<div class="alert alert-info" th:if="${info != null}"
+						th:text="${info}"></div>
+	</div>
+</body>
+</html>
