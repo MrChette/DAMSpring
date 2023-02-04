@@ -1,0 +1,2 @@
+- USUARIOS : admin@gmail.com , alumno1@gmail.com , programador1@gmail.com 
+- CONTRASEÑAS : 1234
